@@ -10,21 +10,28 @@
 */
 
 
-  var cardHand = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
-  var A = ["1", "11"];
-  var K = ["10"];
-  var Q = ["10"];
-  var J = ["10"];
-
-function handValue (hand) {
-    for (let i = 0; i < hand.length; i++) {
-    String.fromCharCode(hand[i]);
-    let space = hand[i].split("");
-    let Ace = space.indexOf("A");
-    console.log(hand);
-
-  return hand;
-    }
+function handValue(hand) {
+   let player = hand;
+   let playerHand = 0;
+   for(var i = 0; i < player.length; i++){
+     if(player[i] == "K" || player[i] == "Q" || player[i] == "J"){
+       player[i] = 10;
+       playerHand += 10;
+     }else if(player[i] == "A" && playerHand < 10){
+       player[i] = 11;
+       playerHand += 11;
+     }else if(player[i] == "A" && playerHand > 10){
+       player[i] = 1;
+       playerHand += 1;
+     }else{
+       player[i] = parseInt(player[i])
+       playerHand += player[i];
+     }
+   }
+   if(playerHand > 21){
+     playerHand -= 10;
+   }
+   return playerHand;
 }
 
 
